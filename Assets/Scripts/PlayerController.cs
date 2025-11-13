@@ -4,8 +4,7 @@ public class PlayerController : MonoBehaviour
 {
    
    private Rigidbody rb;
-   
-
+   private int count;
    private float movementX;
    private float movementY;
 
@@ -16,6 +15,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        count = 0;
     }
 
     // Update is called once per frame
@@ -38,7 +38,14 @@ public class PlayerController : MonoBehaviour
      movementY = movementVector.y;
     }
 
-
-
+    void OnTriggerEnter (Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp")) 
+        {
+            other.gameObject.SetActive(false);
+            count = count + 1;
+        }
+   
+    }
 
 }
